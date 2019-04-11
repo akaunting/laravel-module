@@ -3,7 +3,7 @@
 [![Version](https://poser.pugx.org/akaunting/module/v/stable.svg)](https://github.com/akaunting/module/releases)
 ![Downloads](https://poser.pugx.org/akaunting/module/d/total.svg)
 ![Build Status](https://travis-ci.com/akaunting/module.svg)
-[![StyleCI](https://styleci.io/repos/180799968/shield?style=flat&branch=master)](https://styleci.io/repos/180799968)
+[![StyleCI](https://styleci.io/repos/180859866/shield?style=flat&branch=master)](https://styleci.io/repos/180859866)
 [![Quality](https://scrutinizer-ci.com/g/akaunting/module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/akaunting/module)
 [![License](https://poser.pugx.org/akaunting/module/license.svg)](LICENSE.md)
 
