@@ -35,8 +35,10 @@ class Laravel extends Main
         Stub::setBasePath(__DIR__ . '/Commands/stubs');
 
         $this->app->booted(function ($app) {
-            if ($app['module']->config('stubs.enabled') === true) {
-                Stub::setBasePath($app['module']->config('stubs.path'));
+            $moduleRepository = $app[RepositoryInterface::class];
+            
+            if ($moduleRepository->config('stubs.enabled') === true) {
+                Stub::setBasePath($moduleRepository->config('stubs.path'));
             }
         });
     }

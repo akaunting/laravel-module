@@ -24,17 +24,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Akaunting\\Module\\": "./src"
+            "Akaunting\\Module\\": "src"
         },
         "files": [
             "src/helpers.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-			"Akaunting\\Module\\Tests\\": "tests",
-			"Modules\\Recipe\\": "tests/stubs/valid/Recipe"
-        }
     },
     "extra": {
         "laravel": {

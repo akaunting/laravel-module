@@ -2,13 +2,15 @@
 
 namespace Akaunting\Module;
 
+use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Translation\Translator;
 
-abstract class Module extends ServiceProvider
+abstract class Module
 {
     use Macroable;
 
@@ -39,27 +41,35 @@ abstract class Module extends ServiceProvider
     protected $moduleJson = [];
 
     /**
+     * @var CacheManager
+     */
+    private $cache;
+
+    /**
+     * @var Filesystem
+     */
+    private $files;
+
+    /**
+     * @var Translator
+     */
+    private $translator;
+
+    /**
      * The constructor.
      *
      * @param Container $app
      * @param $alias
      * @param $path
      */
-    public function __construct(Container $app, $alias, $path)
+    public function __construct(Container $app, string $alias, $path)
     {
-        parent::__construct($app);
         $this->alias = $alias;
         $this->path = $path;
-    }
-
-    /**
-     * Get laravel instance.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Laravel\Lumen\Application
-     */
-    public function getLaravel()
-    {
-        return $this->app;
+        $this->cache = $app['cache'];
+        $this->files = $app['files'];
+        $this->translator = $app['translator'];
+        $this->app = $app;
     }
 
     /**
@@ -212,7 +222,7 @@ abstract class Module extends ServiceProvider
         }
 
         return Arr::get($this->moduleJson, $file, function () use ($file) {
-            return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->app['files']);
+            return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
         });
     }
 
@@ -265,7 +275,7 @@ abstract class Module extends ServiceProvider
      */
     protected function fireEvent($event)
     {
-        $this->app['events']->dispatch(sprintf('modules.%s.' . $event, $this->getLowerName()), [$this]);
+        $this->app['events']->dispatch(sprintf('module.%s.' . $event, $this->getLowerName()), [$this]);
     }
     /**
      * Register the aliases from this module.
@@ -423,7 +433,19 @@ abstract class Module extends ServiceProvider
     private function flushCache(): void
     {
         if (config('module.cache.enabled')) {
-            $this->app['cache']->store()->flush();
+            $this->cache->store()->flush();
         }
+    }
+
+    /**
+     * Register a translation file namespace.
+     *
+     * @param  string  $path
+     * @param  string  $namespace
+     * @return void
+     */
+    private function loadTranslationsFrom(string $path, string $namespace): void
+    {
+        $this->translator->addNamespace($namespace, $path);
     }
 }

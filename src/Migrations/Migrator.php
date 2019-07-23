@@ -34,12 +34,13 @@ class Migrator
     /**
      * Create new instance.
      *
-     * @param \Akaunting\Module\Module $module
+     * @param Module $module
+     * @param Application $application
      */
-    public function __construct(Module $module)
+    public function __construct(Module $module, Application $application)
     {
         $this->module = $module;
-        $this->laravel = $module->getLaravel();
+        $this->laravel = $application;
     }
 
     /**

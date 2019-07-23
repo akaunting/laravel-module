@@ -64,6 +64,6 @@ class $CLASS$ extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(__DIR__ . '/../Routes/api.php');
+            ->group(__DIR__ . '/..$API_ROUTES_PATH$');
     }
 }

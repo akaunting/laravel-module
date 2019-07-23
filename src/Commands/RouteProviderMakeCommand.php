@@ -6,6 +6,7 @@ use Akaunting\Module\Support\Config\GenerateConfigReader;
 use Akaunting\Module\Support\Stub;
 use Akaunting\Module\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class RouteProviderMakeCommand extends GeneratorCommand
 {
@@ -36,6 +37,13 @@ class RouteProviderMakeCommand extends GeneratorCommand
     {
         return [
             ['alias', InputArgument::OPTIONAL, 'The alias of module will be used.'],
+        ];
+    }
+
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the file already exists.'],
         ];
     }
 
@@ -86,7 +94,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
      */
     protected function getWebRoutesPath()
     {
-        return '/' . $this->laravel['config']->get('stubs.files.routes', 'Routes/web.php');
+        return '/' . $this->laravel['modules']->config('stubs.files.routes/web', 'Routes/web.php');
     }
 
     /**
@@ -94,7 +102,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
      */
     protected function getApiRoutesPath()
     {
-        return '/' . $this->laravel['config']->get('stubs.files.routes', 'Routes/api.php');
+        return '/' . $this->laravel['modules']->config('stubs.files.routes/api', 'Routes/api.php');
     }
 
     public function getDefaultNamespace() : string

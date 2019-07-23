@@ -2,6 +2,7 @@
 
 namespace Akaunting\Module\Providers;
 
+use Akaunting\Module\Contracts\RepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class Bootstrap extends ServiceProvider
@@ -11,7 +12,7 @@ class Bootstrap extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['module']->boot();
+        $this->app[RepositoryInterface::class]->boot();
     }
 
     /**
@@ -19,6 +20,6 @@ class Bootstrap extends ServiceProvider
      */
     public function register()
     {
-        $this->app['module']->register();
+        $this->app[RepositoryInterface::class]->register();
     }
 }
