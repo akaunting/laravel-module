@@ -7,7 +7,7 @@ trait ModuleCommandTrait
     /**
      * Get the module instance.
      *
-     * @return string
+     * @return \Akaunting\Module\Module
      */
     public function getModule()
     {

@@ -41,7 +41,7 @@ class ModuleGenerator extends Generator
     protected $console;
 
     /**
-     * The pingpong module instance.
+     * The module instance.
      *
      * @var \Akaunting\Module\Module
      */

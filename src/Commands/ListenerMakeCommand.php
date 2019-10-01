@@ -62,20 +62,16 @@ class ListenerMakeCommand extends GeneratorCommand
 
         return (new Stub($this->getStubName(), [
             'ALIAS' => $module->getAlias(),
-            'NAMESPACE' => $this->getNamespace($module),
+            'NAMESPACE' => $this->getClassNamespace($module),
             'EVENTNAME' => $this->getEventName($module),
             'SHORTEVENTNAME' => $this->option('event'),
             'CLASS' => $this->getClass(),
         ]))->render();
     }
 
-    private function getNamespace($module)
+    public function getDefaultNamespace()
     {
-        $listenerPath = GenerateConfigReader::read('listener');
-
-        $namespace = str_replace('/', '\\', $listenerPath->getPath());
-
-        return $this->getClassNamespace($module) . "\\" . $namespace;
+        return $this->laravel['module']->config('paths.generator.listener.path', 'Listeners');
     }
 
     protected function getEventName(Module $module)

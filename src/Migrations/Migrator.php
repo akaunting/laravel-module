@@ -11,7 +11,7 @@ use Akaunting\Module\Support\Config\GenerateConfigReader;
 class Migrator
 {
     /**
-     * Pingpong Module instance.
+     * Module instance.
      *
      * @var \Akaunting\Module\Module
      */
