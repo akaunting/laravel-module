@@ -2,10 +2,10 @@
 
 namespace $NAMESPACE$;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as Provider;
 use Illuminate\Database\Eloquent\Factory;
 
-class $CLASS$ extends ServiceProvider
+class $NAME$ extends Provider
 {
     /**
      * Boot the application events.

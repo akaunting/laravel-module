@@ -69,9 +69,12 @@ class JobMakeCommand extends GeneratorCommand
         $module = $this->getModule();
 
         return (new Stub($this->getStubName(), [
-            'ALIAS' => $module->getAlias(),
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClass(),
+            'ALIAS'             => $module->getAlias(),
+            'NAMESPACE'         => $this->getClassNamespace($module),
+            'CLASS'             => $this->getClass(),
+            'MODULE'            => $this->getModuleName(),
+            'NAME'              => $this->getFileName(),
+            'STUDLY_NAME'       => $module->getStudlyName(),
         ]))->render();
     }
 

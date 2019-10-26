@@ -100,10 +100,6 @@ class ControllerMakeCommand extends GeneratorCommand
     {
         $controller = Str::studly($this->argument('controller'));
 
-        if (Str::contains(strtolower($controller), 'controller') === false) {
-            $controller .= 'Controller';
-        }
-
         return $controller;
     }
 

@@ -329,7 +329,7 @@ class ModuleGenerator extends Generator
         ]);
 
         $this->console->call('module:make-provider', [
-            'name' => $this->getName() . 'ServiceProvider',
+            'name' => 'Main',
             'alias' => $this->alias,
             '--master' => true,
         ]);
@@ -339,7 +339,7 @@ class ModuleGenerator extends Generator
         ]);
 
         $this->console->call('module:make-controller', [
-            'controller' => $this->getName() . 'Controller',
+            'controller' => 'Main',
             'alias' => $this->alias,
         ]);
     }
@@ -425,7 +425,7 @@ class ModuleGenerator extends Generator
         $namespace = $this->getModuleNamespaceReplacement();
         $studlyName = $this->getStudlyNameReplacement();
 
-        $provider = '"' . $namespace . '\\\\' . $studlyName . '\\\\Providers\\\\' . $studlyName . 'ServiceProvider"';
+        $provider = '"' . $namespace . '\\\\' . $studlyName . '\\\\Providers\\\\' . $studlyName . '"';
 
         $content = str_replace($provider, '', $content);
 

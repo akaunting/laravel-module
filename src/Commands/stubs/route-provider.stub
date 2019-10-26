@@ -2,10 +2,10 @@
 
 namespace $NAMESPACE$;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route as Facade;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as Provider;
 
-class $CLASS$ extends ServiceProvider
+class $NAME$ extends Provider
 {
     /**
      * The module namespace to assume when generating URLs to actions.
@@ -47,9 +47,9 @@ class $CLASS$ extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Facade::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(__DIR__ . '/../Routes/web.php');
+            ->group(__DIR__ . '/..$WEB_ROUTES_PATH$');
     }
 
     /**
@@ -61,7 +61,7 @@ class $CLASS$ extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Facade::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(__DIR__ . '/..$API_ROUTES_PATH$');

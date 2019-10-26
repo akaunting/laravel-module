@@ -2,11 +2,11 @@
 
 namespace Akaunting\Module\Commands;
 
-use Illuminate\Support\Str;
 use Akaunting\Module\Module;
 use Akaunting\Module\Support\Config\GenerateConfigReader;
 use Akaunting\Module\Support\Stub;
 use Akaunting\Module\Traits\ModuleCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -90,6 +90,13 @@ class ProviderMakeCommand extends GeneratorCommand
             'FACTORIES_PATH'    => GenerateConfigReader::read('factory')->getPath(),
         ]))->render();
     }
+    /**
+     * @return string
+     */
+    private function getFileName()
+    {
+        return Str::studly($this->argument('name'));
+    }
 
     /**
      * @return mixed
@@ -103,11 +110,4 @@ class ProviderMakeCommand extends GeneratorCommand
         return $path . $generatorPath->getPath() . '/' . $this->getFileName() . '.php';
     }
 
-    /**
-     * @return string
-     */
-    private function getFileName()
-    {
-        return Str::studly($this->argument('name'));
-    }
 }
