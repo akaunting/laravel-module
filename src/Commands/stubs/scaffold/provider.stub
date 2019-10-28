@@ -14,11 +14,11 @@ class $NAME$ extends Provider
      */
     public function boot()
     {
-        $this->registerTranslations();
-        $this->registerConfig();
-        $this->registerViews();
-        $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../$MIGRATIONS_PATH$');
+        $this->loadConfig();
+        $this->loadViews();
+        $this->loadTranslations();
+        $this->loadFactories();
+        $this->loadMigrations();
     }
 
     /**
@@ -28,15 +28,15 @@ class $NAME$ extends Provider
      */
     public function register()
     {
-        $this->app->register(RouteServiceProvider::class);
+        $this->loadRoutes();
     }
 
     /**
-     * Register config.
+     * Load config.
      *
      * @return void
      */
-    protected function registerConfig()
+    protected function loadConfig()
     {
         $this->publishes([
             __DIR__ . '/../$PATH_CONFIG$/config.php' => config_path('$ALIAS$.php'),
@@ -48,11 +48,11 @@ class $NAME$ extends Provider
     }
 
     /**
-     * Register views.
+     * Load views.
      *
      * @return void
      */
-    public function registerViews()
+    public function loadViews()
     {
         $viewPath = resource_path('views/modules/$ALIAS$');
 
@@ -68,11 +68,11 @@ class $NAME$ extends Provider
     }
 
     /**
-     * Register translations.
+     * Load translations.
      *
      * @return void
      */
-    public function registerTranslations()
+    public function loadTranslations()
     {
         $langPath = resource_path('lang/modules/$ALIAS$');
 
@@ -84,14 +84,45 @@ class $NAME$ extends Provider
     }
 
     /**
-     * Register an additional directory of factories.
+     * Load an additional directory of factories.
      *
      * @return void
      */
-    public function registerFactories()
+    public function loadFactories()
     {
         if (!app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(__DIR__ . '/../$FACTORIES_PATH$');
+        }
+    }
+
+    /**
+     * Load migrations.
+     *
+     * @return void
+     */
+    public function loadMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/../$MIGRATIONS_PATH$');
+    }
+
+    /**
+     * Load routes.
+     *
+     * @return void
+     */
+    public function loadRoutes()
+    {
+        if (app()->routesAreCached()) {
+            return;
+        }
+
+        $routes = [
+            'web.php',
+            'api.php',
+        ];
+
+        foreach ($routes as $route) {
+            $this->loadRoutesFrom(__DIR__ . '/../$ROUTES_PATH$/' . $route);
         }
     }
 

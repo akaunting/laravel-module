@@ -58,7 +58,7 @@ final class NotificationMakeCommand extends GeneratorCommand
     {
         $path = module()->getModulePath($this->getModuleAlias());
 
-        $notificationPath = GenerateConfigReader::read('notifications');
+        $notificationPath = GenerateConfigReader::read('notification');
 
         return $path . $notificationPath->getPath() . '/' . $this->getFileName() . '.php';
     }

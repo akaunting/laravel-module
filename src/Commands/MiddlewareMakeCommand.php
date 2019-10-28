@@ -72,7 +72,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
     {
         $path = module()->getModulePath($this->getModuleAlias());
 
-        $middlewarePath = GenerateConfigReader::read('filter');
+        $middlewarePath = GenerateConfigReader::read('middleware');
 
         return $path . $middlewarePath->getPath() . '/' . $this->getFileName() . '.php';
     }

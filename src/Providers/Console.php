@@ -32,7 +32,6 @@ use Akaunting\Module\Commands\PublishMigrationCommand;
 use Akaunting\Module\Commands\PublishTranslationCommand;
 use Akaunting\Module\Commands\RequestMakeCommand;
 use Akaunting\Module\Commands\ResourceMakeCommand;
-use Akaunting\Module\Commands\RouteProviderMakeCommand;
 use Akaunting\Module\Commands\RuleMakeCommand;
 use Akaunting\Module\Commands\SeedCommand;
 use Akaunting\Module\Commands\SeedMakeCommand;
@@ -63,7 +62,6 @@ class Console extends ServiceProvider
         MiddlewareMakeCommand::class,
         NotificationMakeCommand::class,
         ProviderMakeCommand::class,
-        RouteProviderMakeCommand::class,
         InstallCommand::class,
         ListCommand::class,
         ModuleMakeCommand::class,

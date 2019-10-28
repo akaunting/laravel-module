@@ -334,10 +334,6 @@ class ModuleGenerator extends Generator
             '--master' => true,
         ]);
 
-        $this->console->call('module:route-provider', [
-            'alias' => $this->alias,
-        ]);
-
         $this->console->call('module:make-controller', [
             'controller' => 'Main',
             'alias' => $this->alias,

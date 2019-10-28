@@ -87,7 +87,7 @@ class JobMakeCommand extends GeneratorCommand
     {
         $path = module()->getModulePath($this->getModuleAlias());
 
-        $jobPath = GenerateConfigReader::read('jobs');
+        $jobPath = GenerateConfigReader::read('job');
 
         return $path . $jobPath->getPath() . '/' . $this->getFileName() . '.php';
     }
