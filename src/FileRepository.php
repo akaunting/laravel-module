@@ -554,9 +554,9 @@ abstract class FileRepository implements RepositoryInterface, Countable
         }
         list($name, $url) = explode(':', $asset);
 
-        $baseUrl = str_replace(public_path() . DIRECTORY_SEPARATOR, '', $this->getAssetsPath());
+        $base_url = str_replace(public_path() . '/', '', $this->getAssetsPath());
 
-        $url = $this->url->asset($baseUrl . "/{$name}/" . $url);
+        $url = $this->url->asset($base_url . "/{$name}/" . $url);
 
         return str_replace(['http://', 'https://'], '//', $url);
     }

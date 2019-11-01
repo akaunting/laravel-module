@@ -4,6 +4,7 @@ namespace Akaunting\Module\Providers;
 
 use Akaunting\Module\Commands\CommandMakeCommand;
 use Akaunting\Module\Commands\ControllerMakeCommand;
+use Akaunting\Module\Commands\DeleteCommand;
 use Akaunting\Module\Commands\DisableCommand;
 use Akaunting\Module\Commands\DumpCommand;
 use Akaunting\Module\Commands\EnableCommand;
@@ -52,6 +53,7 @@ class Console extends ServiceProvider
     protected $commands = [
         CommandMakeCommand::class,
         ControllerMakeCommand::class,
+        DeleteCommand::class,
         DisableCommand::class,
         DumpCommand::class,
         EnableCommand::class,

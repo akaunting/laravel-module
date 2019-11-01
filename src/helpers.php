@@ -11,21 +11,21 @@ if (!function_exists('module')) {
     function module($alias = null)
     {
         $module = app('module');
-        
+
         if (is_null($alias)) {
             return $module;
         }
-        
+
         return $module->get($alias);
     }
 }
 
 if (!function_exists('module_path')) {
-    function module_path($alias)
+    function module_path($alias, $path = '')
     {
         $module = app('module')->find($alias);
 
-        return $module->getPath();
+        return $module->getPath() . ($path ? '/' . $path : $path);
     }
 }
 
@@ -53,6 +53,6 @@ if (!function_exists('public_path')) {
      */
     function public_path($path = '')
     {
-        return app()->make('path.public') . ($path ? DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR) : $path);
+        return app()->make('path.public') .  ($path ? '/' . $path : $path);
     }
 }
