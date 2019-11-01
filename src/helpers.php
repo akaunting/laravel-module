@@ -53,6 +53,6 @@ if (!function_exists('public_path')) {
      */
     function public_path($path = '')
     {
-        return app()->make('path.public') .  ($path ? '/' . $path : $path);
+        return app()->make('path.public') . ($path ? '/' . $path : $path);
     }
 }

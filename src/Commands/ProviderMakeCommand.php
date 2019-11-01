@@ -110,5 +110,4 @@ class ProviderMakeCommand extends GeneratorCommand
 
         return $path . $generatorPath->getPath() . '/' . $this->getFileName() . '.php';
     }
-
 }
