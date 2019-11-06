@@ -82,7 +82,7 @@ abstract class Module
         $name = trans($this->alias . '::general.name');
 
         if ($name == $this->alias . '::general.name') {
-            $name = Str::title(str_replace('-', ' ', $this->alias));
+            $name = Str::title(str_replace('-', ' ', $this->get('name', $this->alias)));
         }
 
         return $name;
@@ -125,7 +125,13 @@ abstract class Module
      */
     public function getDescription()
     {
-        return $this->get('description');
+        $description = trans($this->alias . '::general.description');
+
+        if ($description == $this->alias . '::general.description') {
+            $description = $this->get('description');
+        }
+
+        return $description;
     }
 
     /**
@@ -135,7 +141,7 @@ abstract class Module
      */
     public function getAlias()
     {
-        return Str::kebab($this->get('alias'));
+        return Str::kebab($this->alias);
     }
 
     /**
