@@ -79,7 +79,13 @@ abstract class Module
      */
     public function getName()
     {
-        return Str::studly($this->alias);
+        $name = trans($this->alias . '::general.name');
+
+        if ($name == $this->alias . '::general.name') {
+            $name = Str::title(str_replace('-', ' ', $this->alias));
+        }
+
+        return $name;
     }
 
     /**
