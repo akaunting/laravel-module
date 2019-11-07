@@ -26,6 +26,7 @@ return [
         'files' => [
             'routes/web' => 'Routes/web.php',
             'routes/api' => 'Routes/api.php',
+            'lang/general' => 'Resources/lang/en/general.php',
             'views/index' => 'Resources/views/index.blade.php',
             'views/master' => 'Resources/views/layouts/master.blade.php',
             'scaffold/config' => 'Config/config.php',
@@ -40,7 +41,8 @@ return [
             'routes/api' => ['ALIAS', 'STUDLY_NAME'],
             'webpack' => ['ALIAS'],
             'json' => ['ALIAS', 'STUDLY_NAME', 'MODULE_NAMESPACE'],
-            'views/index' => ['ALIAS'],
+            'lang/general' => ['ALIAS', 'STUDLY_NAME'],
+            'views/index' => ['ALIAS', 'STUDLY_NAME'],
             'views/master' => ['ALIAS', 'STUDLY_NAME'],
             'scaffold/config' => ['STUDLY_NAME'],
             'composer' => [
@@ -108,7 +110,7 @@ return [
             'resource' => ['path' => 'Http/Resources', 'generate' => false],
             'provider' => ['path' => 'Providers', 'generate' => true],
             'asset' => ['path' => 'Resources/assets', 'generate' => true],
-            'lang' => ['path' => 'Resources/lang', 'generate' => true],
+            'lang' => ['path' => 'Resources/lang/en', 'generate' => true],
             'view' => ['path' => 'Resources/views', 'generate' => true],
             'test' => ['path' => 'Tests', 'generate' => false],
             'repository' => ['path' => 'Repositories', 'generate' => false],
