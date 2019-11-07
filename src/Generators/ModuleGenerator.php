@@ -322,22 +322,28 @@ class ModuleGenerator extends Generator
      */
     public function generateResources()
     {
-        $this->console->call('module:make-seed', [
-            'name' => $this->getName(),
-            'alias' => $this->alias,
-            '--master' => true,
-        ]);
+        if (GenerateConfigReader::read('seeder')->generate() === true) {
+            $this->console->call('module:make-seed', [
+                'name' => $this->getName(),
+                'alias' => $this->alias,
+                '--master' => true,
+            ]);
+        }
 
-        $this->console->call('module:make-provider', [
-            'name' => 'Main',
-            'alias' => $this->alias,
-            '--master' => true,
-        ]);
+        if (GenerateConfigReader::read('provider')->generate() === true) {
+            $this->console->call('module:make-provider', [
+                'name' => 'Main',
+                'alias' => $this->alias,
+                '--master' => true,
+            ]);
+        }
 
-        $this->console->call('module:make-controller', [
-            'controller' => 'Main',
-            'alias' => $this->alias,
-        ]);
+        if (GenerateConfigReader::read('controller')->generate() === true) {
+            $this->console->call('module:make-controller', [
+                'controller' => 'Main',
+                'alias' => $this->alias,
+            ]);
+        }
     }
 
     /**
