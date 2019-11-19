@@ -7,7 +7,7 @@
 [![Quality](https://scrutinizer-ci.com/g/akaunting/module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/akaunting/module)
 [![License](https://poser.pugx.org/akaunting/module/license.svg)](LICENSE.md)
 
-This package intends to make your Laravel app extendible via modules. A module is kinda small Laravel app, shipping with its own views, controllers, models etc.
+This package intends to make your Laravel app extensible via modules. A module is a kinda small Laravel app, shipping with its own views, controllers, models, etc.
 
 ## Getting Started
 
