@@ -22,7 +22,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the specified module by given package name (vendor/name).';
+    protected $description = 'Install the specified module by given package alias (vendor/name).';
 
     /**
      * Create a new command instance.
@@ -37,14 +37,14 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        if (is_null($this->argument('name'))) {
+        if (is_null($this->argument('alias'))) {
             $this->installFromFile();
 
             return;
         }
 
         $this->install(
-            $this->argument('name'),
+            $this->argument('alias'),
             $this->argument('version'),
             $this->option('type'),
             $this->option('tree')
@@ -70,7 +70,7 @@ class InstallCommand extends Command
             $module = collect($module);
 
             $this->install(
-                $module->get('name'),
+                $module->get('alias'),
                 $module->get('version'),
                 $module->get('type')
             );
@@ -85,10 +85,10 @@ class InstallCommand extends Command
      * @param string $type
      * @param bool   $tree
      */
-    protected function install($name, $version = 'dev-master', $type = 'composer', $tree = false)
+    protected function install($alias, $version = 'dev-master', $type = 'composer', $tree = false)
     {
         $installer = new Installer(
-            $name,
+            $alias,
             $version,
             $type ?: $this->option('type'),
             $tree ?: $this->option('tree')
@@ -123,7 +123,7 @@ class InstallCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::OPTIONAL, 'The name of module will be installed.'],
+            ['alias', InputArgument::OPTIONAL, 'The alias of module will be installed.'],
             ['version', InputArgument::OPTIONAL, 'The version of module will be installed.'],
         ];
     }
