@@ -96,7 +96,7 @@ class SeedMakeCommand extends GeneratorCommand
      */
     private function getSeederName()
     {
-        $end = $this->option('master') ? 'DatabaseSeeder' : 'TableSeeder';
+        $end = $this->option('master') ? 'DatabaseSeeder' : '';
 
         return Str::studly($this->argument('name')) . $end;
     }
@@ -108,6 +108,6 @@ class SeedMakeCommand extends GeneratorCommand
      */
     public function getDefaultNamespace() : string
     {
-        return module()->config('paths.generator.seeder.path', 'Database/Seeders');
+        return module()->config('paths.generator.seeder.path', 'Database/Seeds');
     }
 }
