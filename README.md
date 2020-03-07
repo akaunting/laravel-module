@@ -1,11 +1,11 @@
 # Module management package for Laravel
 
-[![Version](https://poser.pugx.org/akaunting/module/v/stable.svg)](https://github.com/akaunting/module/releases)
-![Downloads](https://poser.pugx.org/akaunting/module/d/total.svg)
-![Build Status](https://travis-ci.com/akaunting/module.svg)
-[![StyleCI](https://styleci.io/repos/180859866/shield?style=flat&branch=master)](https://styleci.io/repos/180859866)
-[![Quality](https://scrutinizer-ci.com/g/akaunting/module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/akaunting/module)
-[![License](https://poser.pugx.org/akaunting/module/license.svg)](LICENSE.md)
+[![Version](https://img.shields.io/packagist/v/akaunting/module?label=release)](https://github.com/akaunting/module/releases)
+![Downloads](https://img.shields.io/packagist/dt/akaunting/module)
+![Tests](https://img.shields.io/github/workflow/status/akaunting/module/Tests?label=tests)
+[![StyleCI](https://github.styleci.io/repos/180859866/shield?style=flat&branch=master)](https://styleci.io/repos/180859866)
+[![Quality](https://img.shields.io/scrutinizer/quality/g/akaunting/module?label=quality)](https://scrutinizer-ci.com/g/akaunting/module)
+[![License](https://img.shields.io/github/license/akaunting/module)](LICENSE.md)
 
 This package intends to make your Laravel app extensible via modules. A module is a kinda small Laravel app, shipping with its own views, controllers, models, etc.
 
