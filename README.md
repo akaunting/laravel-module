@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/packagist/v/akaunting/module?label=release)](https://github.com/akaunting/module/releases)
 ![Downloads](https://img.shields.io/packagist/dt/akaunting/module)
-![Tests](https://img.shields.io/github/workflow/status/akaunting/module/Tests?label=tests)
 [![StyleCI](https://github.styleci.io/repos/180859866/shield?style=flat&branch=master)](https://styleci.io/repos/180859866)
 [![Quality](https://img.shields.io/scrutinizer/quality/g/akaunting/module?label=quality)](https://scrutinizer-ci.com/g/akaunting/module)
 [![License](https://img.shields.io/github/license/akaunting/module)](LICENSE.md)
