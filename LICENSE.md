@@ -2,7 +2,7 @@ The MIT License (MIT)
 
 Copyright (c) 2014 Pingpong Labs
 
-Copyright (c) 2016 Nicolas Widart
+Copyright (c) 2016 Nicolas Widart bvba n.widart@gmail.com
 
 Copyright (c) 2019 Akaunting
 
