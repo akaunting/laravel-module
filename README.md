@@ -71,6 +71,7 @@ Pull requests are more than welcome. You must follow the PSR coding standards.
 ## Credits
 
 - [Denis Duliçi](https://github.com/denisdulici)
+- [Nicolas Widart](https://github.com/nwidart)
 - [All Contributors](../../contributors)
 
 ## License
