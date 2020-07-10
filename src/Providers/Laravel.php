@@ -31,7 +31,7 @@ class Laravel extends Main
      * Setup stub path.
      */
     public function setupStubPath()
-    {       
+    {
         $path = $this->app['config']->get('module.stubs.path') ?? __DIR__ . '/Commands/stubs';
 
         Stub::setBasePath($path);
