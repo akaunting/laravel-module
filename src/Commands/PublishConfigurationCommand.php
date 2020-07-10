@@ -48,7 +48,7 @@ class PublishConfigurationCommand extends Command
         $namespace = $this->laravel['config']->get('module.namespace');
         $studlyName = Str::studly($alias);
 
-        return "$namespace\\$studlyName\\Providers\\{$studlyName}ServiceProvider";
+        return "$namespace\\$studlyName\\Providers\\Main";
     }
 
     /**
