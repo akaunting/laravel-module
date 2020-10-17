@@ -116,6 +116,7 @@ class ModelMakeCommand extends GeneratorCommand
             'MODULE'            => $this->getModuleName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
             'MODULE_NAMESPACE'  => $this->laravel['module']->config('namespace'),
+            'FACTORY_NAMESPACE' => $this->getFactoryNamespace(),
         ]))->render();
     }
 
@@ -162,6 +163,20 @@ class ModelMakeCommand extends GeneratorCommand
      */
     public function getDefaultNamespace() : string
     {
-        return $this->laravel['module']->config('paths.generator.model.path', 'Entities');
+        return $this->laravel['module']->config('paths.generator.model.path', 'Models');
+    }
+
+    /**
+     * Get factory namespace.
+     *
+     * @return string
+     */
+    public function getFactoryNamespace(): string
+    {
+        $module = $this->laravel['module'];
+
+        $config = GenerateConfigReader::read('factory');
+
+        return $module->config('namespace') . '\\' . $this->getModuleName() . '\\' . $config->getPath();
     }
 }

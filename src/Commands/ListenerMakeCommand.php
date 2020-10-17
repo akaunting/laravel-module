@@ -64,7 +64,7 @@ class ListenerMakeCommand extends GeneratorCommand
             'ALIAS'             => $module->getAlias(),
             'NAMESPACE'         => $this->getClassNamespace($module),
             'EVENTNAME'         => $this->getEventName($module),
-            'SHORTEVENTNAME'    => $this->option('event'),
+            'SHORTEVENTNAME'    => $this->getShortEventName(),
             'CLASS'             => $this->getClass(),
         ]))->render();
     }
@@ -76,18 +76,25 @@ class ListenerMakeCommand extends GeneratorCommand
 
     protected function getEventName(Module $module)
     {
-        $eventPath = GenerateConfigReader::read('event');
+        $config = GenerateConfigReader::read('event');
 
-        return $this->getClassNamespace($module) . "\\" . $eventPath->getPath() . "\\" . $this->option('event');
+        $name = $this->laravel['module']->config('namespace') . "\\" . $module->getStudlyName() . "\\" . $config->getPath() . "\\" . $this->option('event');
+
+        return str_replace('/', '\\', $name);
+    }
+
+    protected function getShortEventName()
+    {
+        return class_basename($this->option('event'));
     }
 
     protected function getDestinationFilePath()
     {
         $path = module()->getModulePath($this->getModuleAlias());
 
-        $listenerPath = GenerateConfigReader::read('listener');
+        $config = GenerateConfigReader::read('listener');
 
-        return $path . $listenerPath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path . $config->getPath() . '/' . $this->getFileName() . '.php';
     }
 
     /**

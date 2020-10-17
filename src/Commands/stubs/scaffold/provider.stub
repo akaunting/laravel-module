@@ -17,7 +17,6 @@ class $NAME$ extends Provider
         $this->loadConfig();
         $this->loadViews();
         $this->loadTranslations();
-        $this->loadFactories();
         $this->loadMigrations();
     }
 
@@ -80,18 +79,6 @@ class $NAME$ extends Provider
             $this->loadTranslationsFrom($langPath, '$ALIAS$');
         } else {
             $this->loadTranslationsFrom(__DIR__ . '/../$PATH_LANG$', '$ALIAS$');
-        }
-    }
-
-    /**
-     * Load an additional directory of factories.
-     *
-     * @return void
-     */
-    public function loadFactories()
-    {
-        if (!app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(__DIR__ . '/../$FACTORIES_PATH$');
         }
     }
 
