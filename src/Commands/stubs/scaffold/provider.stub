@@ -2,6 +2,7 @@
 
 namespace $NAMESPACE$;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as Provider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -16,6 +17,7 @@ class $NAME$ extends Provider
     {
         $this->loadConfig();
         $this->loadViews();
+        $this->loadViewComponents();
         $this->loadTranslations();
         $this->loadMigrations();
     }
@@ -64,6 +66,16 @@ class $NAME$ extends Provider
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/$ALIAS$';
         }, \Config::get('view.paths')), [$sourcePath]), '$ALIAS$');
+    }
+
+    /**
+     * Load view components.
+     *
+     * @return void
+     */
+    public function loadViewComponents()
+    {
+        Blade::componentNamespace('$COMPONENT_NAMESPACE$', '$ALIAS$');
     }
 
     /**

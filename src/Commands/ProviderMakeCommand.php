@@ -76,19 +76,20 @@ class ProviderMakeCommand extends GeneratorCommand
         $module = $this->getModule();
 
         return (new Stub('/' . $stub . '.stub', [
-            'ALIAS'             => $module->getAlias(),
-            'NAMESPACE'         => $this->getClassNamespace($module),
-            'CLASS'             => $this->getClass(),
-            'MODULE'            => $this->getModuleName(),
-            'NAME'              => $this->getFileName(),
-            'STUDLY_NAME'       => $module->getStudlyName(),
-            'MODULE_NAMESPACE'  => $this->laravel['module']->config('namespace'),
-            'PATH_VIEWS'        => GenerateConfigReader::read('view')->getPath(),
-            'PATH_LANG'         => GenerateConfigReader::read('lang')->getPath(),
-            'PATH_CONFIG'       => GenerateConfigReader::read('config')->getPath(),
-            'MIGRATIONS_PATH'   => GenerateConfigReader::read('migration')->getPath(),
-            'FACTORIES_PATH'    => GenerateConfigReader::read('factory')->getPath(),
-            'ROUTES_PATH'       => GenerateConfigReader::read('route')->getPath(),
+            'ALIAS'                 => $module->getAlias(),
+            'NAMESPACE'             => $this->getClassNamespace($module),
+            'CLASS'                 => $this->getClass(),
+            'MODULE'                => $this->getModuleName(),
+            'NAME'                  => $this->getFileName(),
+            'STUDLY_NAME'           => $module->getStudlyName(),
+            'MODULE_NAMESPACE'      => $this->laravel['module']->config('namespace'),
+            'COMPONENT_NAMESPACE'   => $this->getComponentNamespace(),
+            'PATH_VIEWS'            => GenerateConfigReader::read('view')->getPath(),
+            'PATH_LANG'             => GenerateConfigReader::read('lang')->getPath(),
+            'PATH_CONFIG'           => GenerateConfigReader::read('config')->getPath(),
+            'MIGRATIONS_PATH'       => GenerateConfigReader::read('migration')->getPath(),
+            'FACTORIES_PATH'        => GenerateConfigReader::read('factory')->getPath(),
+            'ROUTES_PATH'           => GenerateConfigReader::read('route')->getPath(),
         ]))->render();
     }
     /**
@@ -109,5 +110,20 @@ class ProviderMakeCommand extends GeneratorCommand
         $generatorPath = GenerateConfigReader::read('provider');
 
         return $path . $generatorPath->getPath() . '/' . $this->getFileName() . '.php';
+    }
+
+    protected function getComponentNamespace()
+    {
+        $module = $this->laravel['module'];
+
+        $namespace = $module->config('namespace');
+
+        $namespace .= '\\' . $this->getModuleName() . '\\';
+
+        $namespace .= $module->config('paths.generator.component.namespace') ?: $module->config('paths.generator.component.path');
+
+        $namespace = str_replace('/', '\\', $namespace);
+
+        return trim($namespace, '\\');
     }
 }
