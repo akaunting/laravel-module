@@ -20,12 +20,46 @@ if (!function_exists('module')) {
     }
 }
 
+if (!function_exists('module_attribute')) {
+    /**
+     * Get an attribute from module.json file
+     *
+     * @param string $alias
+     * @param string $attribute
+     *
+     * @return mixed
+     */
+    function module_attribute($alias, $attribute)
+    {
+        return app('module')->get($alias)->get($attribute);
+    }
+}
+
+if (!function_exists('module_version')) {
+    /**
+     * Get the module version
+     *
+     * @param string $alias
+     *
+     * @return mixed
+     */
+    function module_version($alias)
+    {
+        return app('module')->get($alias)->get('version');
+    }
+}
+
 if (!function_exists('module_path')) {
+    /**
+     * Get the module path
+     *
+     * @param string $alias
+     *
+     * @return mixed
+     */
     function module_path($alias, $path = '')
     {
-        $module = app('module')->find($alias);
-
-        return $module->getPath() . ($path ? '/' . $path : $path);
+        return app('module')->get($alias)->getPath() . ($path ? '/' . $path : $path);
     }
 }
 
