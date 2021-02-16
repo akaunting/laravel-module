@@ -177,6 +177,8 @@ class ModelMakeCommand extends GeneratorCommand
 
         $config = GenerateConfigReader::read('factory');
 
-        return $module->config('namespace') . '\\' . $this->getModuleName() . '\\' . $config->getPath();
+        $path = str_replace('/', '\\', $config->getPath());
+
+        return $module->config('namespace') . '\\' . $this->getModuleName() . '\\' . $path;
     }
 }
