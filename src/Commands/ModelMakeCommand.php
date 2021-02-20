@@ -86,6 +86,7 @@ class ModelMakeCommand extends GeneratorCommand
         return [
             ['fillable', null, InputOption::VALUE_OPTIONAL, 'The fillable attributes.', null],
             ['migration', 'm', InputOption::VALUE_NONE, 'Flag to create associated migrations', null],
+            ['factory', 'f', InputOption::VALUE_NONE, 'Flag to create associated factory', null],
         ];
     }
 
@@ -97,6 +98,10 @@ class ModelMakeCommand extends GeneratorCommand
         if ($this->option('migration') === true) {
             $migrationName = 'create_' . $this->createMigrationName() . '_table';
             $this->call('module:make-migration', ['name' => $migrationName, 'alias' => $this->argument('alias')]);
+        }
+
+        if ($this->option('factory') === true) {
+            $this->call('module:make-factory', ['name' => $this->argument('model'), 'alias' => $this->argument('alias')]);
         }
     }
 
