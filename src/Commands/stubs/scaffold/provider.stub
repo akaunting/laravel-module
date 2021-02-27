@@ -4,7 +4,6 @@ namespace $NAMESPACE$;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as Provider;
-use Illuminate\Database\Eloquent\Factory;
 
 class $NAME$ extends Provider
 {
