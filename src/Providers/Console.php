@@ -13,6 +13,7 @@ class Console extends ServiceProvider
      * @var array
      */
     protected $commands = [
+        Commands\CastMakeCommand::class,
         Commands\CommandMakeCommand::class,
         Commands\ComponentMakeCommand::class,
         Commands\ControllerMakeCommand::class,
