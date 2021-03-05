@@ -1,6 +1,6 @@
 {
-    "name": "akaunting/module",
-    "description": "Module management package for Laravel.",
+    "name": "akaunting/laravel-module",
+    "description": "Module management package for Laravel",
     "keywords": ["laravel", "module", "rad", "akaunting"],
     "license": "MIT",
     "authors": [

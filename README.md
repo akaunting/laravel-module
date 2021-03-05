@@ -1,10 +1,9 @@
 # Module management package for Laravel
 
-[![Version](https://img.shields.io/packagist/v/akaunting/module?label=release)](https://github.com/akaunting/module/releases)
-![Downloads](https://img.shields.io/packagist/dt/akaunting/module)
+![Downloads](https://img.shields.io/packagist/dt/akaunting/laravel-module)
 [![StyleCI](https://github.styleci.io/repos/180859866/shield?style=flat&branch=master)](https://styleci.io/repos/180859866)
-[![Quality](https://img.shields.io/scrutinizer/quality/g/akaunting/module?label=quality)](https://scrutinizer-ci.com/g/akaunting/module)
-[![License](https://img.shields.io/github/license/akaunting/module)](LICENSE.md)
+[![Quality](https://img.shields.io/scrutinizer/quality/g/akaunting/laravel-module?label=quality)](https://scrutinizer-ci.com/g/akaunting/laravel-module)
+[![License](https://img.shields.io/github/license/akaunting/laravel-module)](LICENSE.md)
 
 This package intends to make your Laravel app extensible via modules. A module is a kinda small Laravel app, shipping with its own views, controllers, models, etc.
 
@@ -15,7 +14,7 @@ This package intends to make your Laravel app extensible via modules. A module i
 Run the following command:
 
 ```bash
-composer require akaunting/module
+composer require akaunting/laravel-module
 ```
 
 ### 2. Register
