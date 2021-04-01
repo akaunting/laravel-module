@@ -124,6 +124,7 @@ return [
             'route' => ['path' => 'Routes', 'generate' => true],
             'component' => ['path' => 'View/Components', 'generate' => false],
             'cast' => ['path' => 'Casts', 'generate' => false],
+            'observer' => ['path' => 'Observers', 'generate' => false],
         ],
     ],
 

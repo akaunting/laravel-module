@@ -54,6 +54,7 @@ class Console extends ServiceProvider
         Commands\UseCommand::class,
         Commands\ResourceMakeCommand::class,
         Commands\TestMakeCommand::class,
+        Commands\ObserverMakeCommand::class,
     ];
 
     /**
