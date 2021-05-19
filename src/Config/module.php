@@ -125,6 +125,7 @@ return [
             'component' => ['path' => 'View/Components', 'generate' => false],
             'cast' => ['path' => 'Casts', 'generate' => false],
             'observer' => ['path' => 'Observers', 'generate' => false],
+            'exception' => ['path' => 'Exceptions', 'generate' => false],
         ],
     ],
 
