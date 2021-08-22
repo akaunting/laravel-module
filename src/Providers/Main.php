@@ -33,7 +33,7 @@ abstract class Main extends ServiceProvider
      * Register package's namespaces.
      */
     protected function registerNamespaces()
-    {       
+    {
         $this->publishes([
             __DIR__ . '/../Config/module.php' => config_path('module.php'),
         ], 'module');
