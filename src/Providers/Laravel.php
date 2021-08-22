@@ -25,6 +25,7 @@ class Laravel extends Main
         $this->registerServices();
         $this->setupStubPath();
         $this->registerProviders();
+        $this->registerConfig();
     }
 
     /**
@@ -57,5 +58,13 @@ class Laravel extends Main
         });
         
         $this->app->alias(RepositoryInterface::class, 'module');
+    }
+
+    /**
+     * Register module config.
+     */
+    public function registerConfig()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../Config/module.php', 'module');
     }
 }
