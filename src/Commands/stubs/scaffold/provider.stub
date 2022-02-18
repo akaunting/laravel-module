@@ -8,27 +8,28 @@ use Illuminate\Support\ServiceProvider as Provider;
 class $NAME$ extends Provider
 {
     /**
-     * Boot the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->loadConfig();
-        $this->loadViews();
-        $this->loadViewComponents();
-        $this->loadTranslations();
-        $this->loadMigrations();
-    }
-
-    /**
      * Register the service provider.
      *
      * @return void
      */
     public function register()
     {
+        $this->loadConfig();
         $this->loadRoutes();
+    }
+
+    /**
+     * Boot the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->publishConfig();
+        $this->loadViews();
+        $this->loadViewComponents();
+        $this->loadTranslations();
+        $this->loadMigrations();
     }
 
     /**
@@ -38,13 +39,21 @@ class $NAME$ extends Provider
      */
     protected function loadConfig()
     {
-        $this->publishes([
-            __DIR__ . '/../$PATH_CONFIG$/config.php' => config_path('$ALIAS$.php'),
-        ], 'config');
-
         $this->mergeConfigFrom(
             __DIR__ . '/../$PATH_CONFIG$/config.php', '$ALIAS$'
         );
+    }
+
+    /**
+     * Publish config.
+     *
+     * @return void
+     */
+    protected function publishConfig()
+    {
+        $this->publishes([
+            __DIR__ . '/../$PATH_CONFIG$/config.php' => config_path('$ALIAS$.php'),
+        ], 'config');
     }
 
     /**
