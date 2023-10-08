@@ -197,7 +197,7 @@ abstract class Module
             $this->registerTranslation();
         }
 
-        if ($this->isLoadFilesOnBoot()) {
+        if (config('module.register.files') == 'boot') {
             $this->registerFiles();
         }
 
@@ -273,7 +273,7 @@ abstract class Module
 
         $this->registerProviders();
 
-        if ($this->isLoadFilesOnBoot() === false) {
+        if (config('module.register.files') == 'register') {
             $this->registerFiles();
         }
 
@@ -428,18 +428,6 @@ abstract class Module
     public function __get($key)
     {
         return $this->get($key);
-    }
-
-    /**
-     * Check if can load files of module on boot method.
-     *
-     * @return bool
-     */
-    protected function isLoadFilesOnBoot()
-    {
-        return config('module.register.files', 'register') === 'boot' &&
-            // force register method if option == boot && app is AsgardCms
-            !class_exists('\Modules\Core\Foundation\AsgardCms');
     }
 
     private function flushCache(): void
