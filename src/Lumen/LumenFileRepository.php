@@ -3,6 +3,7 @@
 namespace Akaunting\Module\Lumen;
 
 use Akaunting\Module\FileRepository;
+use Akaunting\Module\Lumen\Module;
 
 class LumenFileRepository extends FileRepository
 {

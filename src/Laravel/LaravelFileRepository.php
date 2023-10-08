@@ -3,6 +3,7 @@
 namespace Akaunting\Module\Laravel;
 
 use Akaunting\Module\FileRepository;
+use Akaunting\Module\Laravel\Module;
 
 class LaravelFileRepository extends FileRepository
 {

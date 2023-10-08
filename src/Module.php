@@ -189,27 +189,48 @@ abstract class Module
     }
 
     /**
-     * Bootstrap the application events.
+     * Register the module.
+     */
+    public function register()
+    {
+        $this->autoload('register');
+
+        $this->registerAliases();
+
+        $this->registerProviders();
+
+        $this->fireEvent('register');
+    }
+
+    /**
+     * Boot the module.
      */
     public function boot()
     {
-        if (config('module.register.translations', true) === true) {
-            $this->registerTranslation();
+        if (config('module.autoload.translations') === true) {
+            $this->loadTranslations();
         }
 
-        if (config('module.register.files') == 'boot') {
-            $this->registerFiles();
-        }
+        $this->autoload('boot');
 
         $this->fireEvent('boot');
     }
 
+    public function autoload(string $stage): void
+    {
+        if (config('module.autoload.files') == $stage) {
+            $this->loadFiles();
+        }
+
+        if (config('module.autoload.composer') == $stage) {
+            $this->loadComposer();
+        }
+    }
+
     /**
-     * Register module's translation.
-     *
-     * @return void
+     * Load the translations of this module.
      */
-    protected function registerTranslation()
+    protected function loadTranslations(): void
     {
         $name = $this->getAlias();
 
@@ -218,6 +239,30 @@ abstract class Module
         if (is_dir($path)) {
             $this->loadTranslationsFrom($path, $name);
         }
+    }
+
+    /**
+     * Load the files from this module.
+     */
+    protected function loadFiles(): void
+    {
+        foreach ($this->get('files', []) as $file) {
+            include $this->getPath() . '/' . $file;
+        }
+    }
+
+    /**
+     * Load the composer of this module.
+     */
+    protected function loadComposer(): void
+    {
+        $autoload = $this->getPath() . '/vendor/autoload.php';
+
+        if (! is_file($autoload)) {
+            return;
+        }
+
+        include $autoload;
     }
 
     /**
@@ -265,22 +310,6 @@ abstract class Module
     }
 
     /**
-     * Register the module.
-     */
-    public function register()
-    {
-        $this->registerAliases();
-
-        $this->registerProviders();
-
-        if (config('module.register.files') == 'register') {
-            $this->registerFiles();
-        }
-
-        $this->fireEvent('register');
-    }
-
-    /**
      * Register the module event.
      *
      * @param string $event
@@ -305,16 +334,6 @@ abstract class Module
      * @return string
      */
     abstract public function getCachedServicesPath();
-
-    /**
-     * Register the files from this module.
-     */
-    protected function registerFiles()
-    {
-        foreach ($this->get('files', []) as $file) {
-            include $this->path . '/' . $file;
-        }
-    }
 
     /**
      * Handle call __toString.
