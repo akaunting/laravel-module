@@ -2,6 +2,7 @@
 
 namespace Akaunting\Module;
 
+use Akaunting\Module\Contracts\ActivatorInterface;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
@@ -56,6 +57,11 @@ abstract class Module
     private $translator;
 
     /**
+     * @var ActivatorInterface
+     */
+    private $activator;
+
+    /**
      * The constructor.
      *
      * @param Container $app
@@ -69,6 +75,7 @@ abstract class Module
         $this->cache = $app['cache'];
         $this->files = $app['files'];
         $this->translator = $app['translator'];
+        $this->activator = $app[ActivatorInterface::class];
         $this->app = $app;
     }
 
@@ -347,56 +354,45 @@ abstract class Module
 
     /**
      * Determine whether the given status same with the current module status.
-     *
-     * @param $status
-     *
-     * @return bool
      */
-    public function isStatus($status) : bool
+    public function isStatus(bool $status) : bool
     {
-        return $this->get('active', 0) === $status;
+        return $this->activator->is($this, $status);
     }
 
     /**
      * Determine whether the current module activated.
-     *
-     * @return bool
      */
     public function enabled() : bool
     {
-        return $this->isStatus(1);
+        return $this->activator->is($this, true);
     }
 
     /**
      *  Determine whether the current module not disabled.
-     *
-     * @return bool
      */
     public function disabled() : bool
     {
-        return !$this->enabled();
+        return $this->activator->is($this, false);
     }
 
     /**
      * Set active state for current module.
-     *
-     * @param $active
-     *
-     * @return bool
      */
-    public function setActive($active)
+    public function setActive(bool $active): void
     {
-        return $this->json()->set('active', $active)->save();
+        $this->activator->setActive($this, $active);
     }
 
     /**
      * Disable the current module.
      */
-    public function disable()
+    public function disable(): void
     {
         $this->fireEvent('disabling');
 
-        $this->setActive(0);
+        $this->activator->disable($this);
+
         $this->flushCache();
 
         $this->fireEvent('disabled');
@@ -405,11 +401,12 @@ abstract class Module
     /**
      * Enable the current module.
      */
-    public function enable()
+    public function enable(): void
     {
         $this->fireEvent('enabling');
 
-        $this->setActive(1);
+        $this->activator->enable($this);
+
         $this->flushCache();
 
         $this->fireEvent('enabled');
@@ -417,11 +414,11 @@ abstract class Module
 
     /**
      * Delete the current module.
-     *
-     * @return bool
      */
-    public function delete()
+    public function delete(): bool
     {
+        $this->activator->delete($this);
+
         return $this->json()->getFilesystem()->deleteDirectory($this->getPath());
     }
 

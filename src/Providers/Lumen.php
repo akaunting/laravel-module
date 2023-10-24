@@ -2,6 +2,7 @@
 
 namespace Akaunting\Module\Providers;
 
+use Akaunting\Module\Contracts\ActivatorInterface;
 use Akaunting\Module\Contracts\RepositoryInterface;
 use Akaunting\Module\Lumen\LumenFileRepository;
 use Akaunting\Module\Support\Stub;
@@ -49,7 +50,13 @@ class Lumen extends Main
 
             return new LumenFileRepository($app, $path);
         });
-        
+
+        $this->app->singleton(ActivatorInterface::class, function ($app) {
+            $class = $app['config']->get('module.activator');
+
+            return new $class($app);
+        });
+
         $this->app->alias(RepositoryInterface::class, 'module');
     }
 }

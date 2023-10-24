@@ -189,4 +189,14 @@ return [
         'composer'      => 'register',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Activator
+    |--------------------------------------------------------------------------
+    |
+    | Here is the activator class.
+    |
+    */
+    'activator' => env('MODULE_ACTIVATOR', \Akaunting\Module\Activators\File::class),
+
 ];

@@ -2,6 +2,7 @@
 
 namespace Akaunting\Module\Providers;
 
+use Akaunting\Module\Contracts\ActivatorInterface;
 use Akaunting\Module\Contracts\RepositoryInterface;
 use Akaunting\Module\Laravel\LaravelFileRepository;
 use Akaunting\Module\Support\Stub;
@@ -39,7 +40,7 @@ class Laravel extends Main
 
         $this->app->booted(function ($app) {
             $repository = $app[RepositoryInterface::class];
-            
+
             if ($repository->config('stubs.enabled') === true) {
                 Stub::setBasePath($repository->config('stubs.path'));
             }
@@ -56,7 +57,13 @@ class Laravel extends Main
 
             return new LaravelFileRepository($app, $path);
         });
-        
+
+        $this->app->singleton(ActivatorInterface::class, function ($app) {
+            $class = $app['config']->get('module.activator');
+
+            return new $class($app);
+        });
+
         $this->app->alias(RepositoryInterface::class, 'module');
     }
 
