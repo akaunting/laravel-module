@@ -309,6 +309,30 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
+     * Get all available modules.
+     *
+     * @return array
+     */
+    public function getAvailable()
+    {
+        $paths = $this->getScanPaths();
+
+        $modules = [];
+
+        foreach ($paths as $key => $path) {
+            $manifests = $this->getFiles()->glob("{$path}/module.json");
+
+            is_array($manifests) || $manifests = [];
+
+            foreach ($manifests as $manifest) {
+                $modules[] = Json::make($manifest)->get('alias');
+            }
+        }
+
+        return $modules;
+    }
+
+    /**
      * Get a module path.
      *
      * @return string
