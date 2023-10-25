@@ -70,7 +70,7 @@ interface RepositoryInterface
     /**
      * Get modules by the given status.
      *
-     * @param int $status
+     * @param bool $status
      *
      * @return mixed
      */
