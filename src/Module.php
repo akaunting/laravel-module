@@ -254,7 +254,7 @@ abstract class Module
     protected function loadFiles(): void
     {
         foreach ($this->get('files', []) as $file) {
-            include $this->getPath() . '/' . $file;
+            include_once $this->getPath() . '/' . $file;
         }
     }
 
